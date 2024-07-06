@@ -23,9 +23,6 @@ for participants = 1:length(allParticipants)
 
     channelLocs = importdata("chanlocs_EEG.mat");
 
-    % Source for similar paper:
-    % https://pdf.sciencedirectassets.com/273545/1-s2.0-S1746809423X00032/1-s2.0-S174680942300366X/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAUaCXVzLWVhc3QtMSJIMEYCIQCb5lbhpPL9hOQUpK5UQlh%2FjfFQ0p9dREQn4c%2BG670%2FNwIhALjC%2BidJLDNcrDLa9szvfepiH2U8LR6OVcMfMhidnvdZKrwFCI7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBRoMMDU5MDAzNTQ2ODY1IgxFU6q7spITZWvnQi0qkAXb6OG38KfZosZr17%2FvfGRyI896iu22I1fUVL8dMFqWP%2F%2BQRsD65S1yYx3PCqhevtZpG58%2FJS5egsgtzqjZgZsiBcusA34TXzzOUpp2vhzDVG5Kct6b3gKssDwsWfzowfeJ02ZKw%2FES6jnUMlB%2Bhk%2BRz%2BXmDMkbR4%2BBZH7rfe4yoUfVgZL0omSaM2kG4NLwVCzSHpDr%2BDaRNYJaqNIbVGdAQm%2FPWc2VUILZ%2F14qL5Lw0BT1f1J48gp1rqWLS6d%2BTHtGoxjhZW0vS05isdsy0C8dOh4e423FSWPbV%2FlpG2gXSGGkW8qu%2BO1RunpfvoNBpqjvy%2F%2BJKcNd6PAwpohXKkUihRUGPaXR%2FReofJ%2FyTjKavkb%2Fcazdz%2BilVfwnRLHcB5m2%2FbCTv%2BwXAv7XM2dvWy6uzz6KWWW7W7RGLNPBspzuhIcWz09h5F5Tz9bWxGlPCR%2FVqPMCdQnklPnD8V%2FSJqIr58W2AQwQr1n2yz0VOsNt%2B3GUWUZYrHrt3UDRw4kZbdxhgMABubjnH6im%2FST%2BKGtGvS31QxtbOlM3q1vIwkDam9t4izR5JcwAlpnBclsxNX7E7T%2B49W4spD%2BQNETH%2F8%2FykPMEA%2BiAHJFo9IfRvDpxjMg%2BBVZ82tyCKRv8Qyzv5UQL61BqCHNkKQykoUeQz1bvWeihhd1RWV2Ugx7Ehny8cVSvAuUHVnHIZlQ2Z87zhXiJvzYEc%2BO%2B5mTugcFpUlLbJV4jgJLdqBAef%2FUwak9tmHG%2BBg3NuAORBYii%2FRJej2S3vN4e0M%2FqLRQ5A1krP70j%2BECPlXSC8j7d4%2F5XISvblvAsnjnmO%2FBIYZINVhs3giyQFMJZ%2BsgVwOEydYXwj2Xcc8NfACanE71EneCam1RFZDDR9vayBjqwAUECd47hNGKD0hy%2FZrraEmKxQob74CcWv1v3fvRTUKjXfobZVBaayH35x3pcR%2FKcVT59LQruizZOqRgDGVczPlN2SzioiziKkO1OxX9FDWAPfbEk80Q7FF3HlPFsV9r7RDoj7R7rSgMzMr0hD1J2E8Gf9H0M1KwkzDWtLOEqLkeBcIcYgkVIbfLuFkE%2BqVuehl3bC3FWAB9XwJDOwuc330Ilvof%2BPfTlFVa6dXvYtal1&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240603T133347Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYTGOWOX5D%2F20240603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=7ef0d23f993b23471dc63f129b544a399fd573dcde413792784aab73cb88d562&hash=d073c7d6cf7b7248346d2e5e7422b2e34185c34b0b136a16697542cf5f676817&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S174680942300366X&tid=spdf-253475aa-fca6-43b9-9ad1-35c42c2be6b5&sid=c7422ff64880d842c67992114c045ca63622gxrqb&type=client&tsoh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnByb3h5LXViLnJ1Zy5ubA%3D%3D&ua=080f5d580355510a5f52&rr=88e00e925d3bb7ac&cc=nl
-
     % BELOW THIS IS THE EEGLAB SCRIPT:
     EEG.etc.eeglabvers = '2023.0'; % this tracks which version of EEGLAB is being used, you may ignore it
     EEG = pop_importdata('dataformat','array','nbchan',0,'data', 'subject_EEG','setname','EEG_Test_ForScript','srate',100,'pnts',0,'xmin',0,'chanlocs','channelLocs');
@@ -354,12 +351,6 @@ for participants = 1:length(allParticipants)
             test_Data_precision2(:,:,i) = seg;
         end
 
-        % TODO: in the test data, all the filters have been implemented, but
-        % the trial type is lost.
-
-        % THE TRAINING DATA SHOULD BE BETWEEN THE INDIVIDUAL CONDITIONS IN ONLY
-        % ONE SUBSET OF THE CSP. NOT BETWEEN EACH CSP FILTERED CONDITION.
-
         % Calculate logVariance for Training, Test & Reference set
 
         % TRAINING
@@ -463,13 +454,6 @@ for participants = 1:length(allParticipants)
         trainingTargetFeatures_power = [];
         trainingTargetFeatures_prec5 = [];
         trainingTargetFeatures_prec2 = [];
-
-        % TODO: maybe only 1 logVar manipulation for each trial.
-        %TODO: HERE IS THE ISSUE. A decision boundary should be established for
-        % the CSP filtered condition. SO, ONLY USE THE ONES THAT ARE POWER
-        % CONDITION. NOT ALL CONDITIONS
-
-        % 584 trials training, 64 test.
 
         % Power
 
@@ -650,11 +634,6 @@ for participants = 1:length(allParticipants)
         md_power_csp_prediction = predict(md_power, testTargetFeatures_power(:,1:2));
         md_prec5_csp_prediction = predict(md_prec5, testTargetFeatures_prec5(:,1:2));
         md_prec2_csp_prediction = predict(md_prec2, testTargetFeatures_prec2(:,1:2));
-
-        % As the decision boundary can't distinguish between conditions, a
-        % confusion matrix was not made. This would have resulted in results
-        % that are not interesting. The graphs are more informational than a
-        % confusion matrix.
 
         % Run the k-nn classifier over the test data
         md_knn_power_prediction = predict(md_knn_power_csp, testTargetFeatures_power(:,1:2));
